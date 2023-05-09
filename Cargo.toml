@@ -1,10 +1,9 @@
 [package]
 name = "otel-opamp-rs"
 version = "0.0.1"
+authors = ["Harsh Baste <hbaste@newrelic.com>", "Kav Pather <kav@newrelic.com>"]
 edition = "2021"
 license-file = "LICENSE"
 description = "Open-Telemetry OpAMP client library" 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
