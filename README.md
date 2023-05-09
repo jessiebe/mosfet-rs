@@ -2,17 +2,18 @@
 
 # OpAMP Rust
 
-> The Open Agent Management Protocol (OpAMP) is a network protocol for remote management of agents. This project aims to implement the OpAMP protocol in a client library that can be used by Supervisor processes. By leveraging Rust's memory safety and performance, we aim to provide a reliable and efficient way of transmitting observability metrics.
+ The Open Agent Management Protocol (OpAMP) is a network protocol for remote management of agents. This project aims to implement the OpAMP protocol in a client library that can be used by Supervisor processes. By leveraging Rust's memory safety and performance, we aim to provide a reliable and efficient way of transmitting observability metrics.
 
 ## Getting Started
 
-> This library is published as a standard crate. To add it to your project, include it as a dependency inside Cargo.toml like so:
+ This library is published as a standard crate. To add it to your project, include it as a dependency inside Cargo.toml like so:
 ```
 [dependencies]
 otel-opamp-rs = "*"
 ```
 ## Features
-> This library supports the following capabilities
+
+This library supports the following capabilities
  - HTTP support
  - Websocket support
  - Gzip compression
@@ -22,7 +23,7 @@ The code references stable releases of the OpAMP protocol protobuf definition [h
 
 ## Building
 
-> This code uses the current stable release of Rust. 
+This code uses the current stable release of Rust. 
 
 ## Support
 
