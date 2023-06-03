@@ -5,6 +5,7 @@ authors = ["Harsh Baste <hbaste@newrelic.com>"]
 edition = "2021"
 license-file = "LICENSE"
 description = "OpenTelemetry OpAMP protocol client library"
+homepage = "https://github.com/newrelic/otel-opamp-rs"
 
 [features]
 default = ["http"]
