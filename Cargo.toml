@@ -1,9 +1,57 @@
 [package]
 name = "otel-opamp-rs"
 version = "0.0.3"
-authors = ["Harsh Baste <hbaste@newrelic.com>", "Kav Pather <kav@newrelic.com>"]
+authors = ["Harsh Baste <hbaste@newrelic.com>"]
 edition = "2021"
 license-file = "LICENSE"
-description = "Open-Telemetry OpAMP client library" 
+description = "OpenTelemetry OpAMP protocol client library"
+
+[features]
+default = ["http", "websocket", "extras"]
+
+# Extras provide support for unpacking OpAMP replies
+extras = ["config", "launcher"]
+
+http = ["reqwest"]
+websocket = ["tokio-tungstenite"]
+config = ["serde", "serde_yaml"]
+launcher = ["subprocess", "crossbeam-channel"]
 
 [dependencies]
+async-trait = "0.1.68"
+futures = "0.3.28"
+futures-channel = "0.3.28"
+futures-util = { version = "0.3.28", default-features = false, features = [
+    "sink",
+    "std",
+] }
+log = "0.4.17"
+prost = "0.11.9"
+prost-types = "0.11.9"
+rand = "0.8.5"
+simple_logger = "4.1.0"
+sysinfo = "0.29.0"
+tokio = { version = "1.28.1", features = ["full"] }
+libdeflater = "0.14.0"
+ulid = "1.0.0"
+url = "2.3.1"
+
+# Optional dependencies
+reqwest = { version = "0.11.18", optional = true }
+tokio-tungstenite = { version = "0.19.0", features = [
+    "native-tls",
+], optional = true }
+serde = { version = "1.0.163", features = ["derive"], optional = true }
+serde_yaml = { version = "0.9.21", optional = true }
+crossbeam-channel = { version = "0.5.8", optional = true }
+subprocess = { version = "0.2.9", optional = true }
+
+[build-dependencies]
+protoc-bin-vendored = "3.0.0"
+prost-build = "0.11.9"
+
+[profile.release]
+opt-level = 'z'   # Optimize for size
+lto = true
+codegen-units = 1
+strip = true
