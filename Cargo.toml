@@ -7,7 +7,7 @@ license-file = "LICENSE"
 description = "OpenTelemetry OpAMP protocol client library"
 
 [features]
-default = ["http", "websocket", "extras"]
+default = ["http"]
 
 # Extras provide support for unpacking OpAMP replies
 extras = ["config", "launcher"]
