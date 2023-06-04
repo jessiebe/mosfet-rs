@@ -11,6 +11,8 @@
 [dependencies]
 otel-opamp-rs = { version = "0.0.4", features = ["http", "websocket", "extras"] }
 ```
+
+For more details refer to the [API documentation](https://docs.rs/otel-opamp-rs/latest/otel_opamp_rs/)
 ## Features
 
 This library supports the following capabilities
@@ -24,7 +26,7 @@ The code references stable releases of the OpAMP protocol protobuf definition [h
 ## Building
 
 This code uses the current stable release of Rust.
- 
+
 To checkout and build the code do the following:
 ```
 git clone --recursive git@github.com:newrelic/otel-opamp-rs.git
