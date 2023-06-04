@@ -362,6 +362,12 @@ impl Channel for HttpClient<'_> {
                 };
             }
 
+            // Relay upstream errors to the client
+            if msg.error_response.is_some() {
+                let mut func = self.callback.lock().unwrap();
+                func.on_error(&msg);
+            }
+
             // Check and report full state
             if msg.flags & (ServerToAgentFlags::ReportFullState as u64) != 0 {
                 // Check our health (matches with our instance_id)

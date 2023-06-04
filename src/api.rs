@@ -17,7 +17,7 @@ pub trait ApiCallbacks {
     /// Primary execution loop of the OpAMP client
     fn on_loop(&mut self) -> Result<Option<AgentToServer>, ApiClientError>;
     /// Reverse reported errors
-    fn on_error(&mut self);
+    fn on_error(&mut self, inbound: &ServerToAgent);
     /// Health check callback for the supervisor to report its (and subagent) health
     fn on_health_check(
         &mut self,

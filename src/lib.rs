@@ -37,7 +37,10 @@
 //!     fn get_configuration(&mut self) -> Result<Option<AgentConfigMap>, ApiClientError>;
 //!     fn get_features(&mut self) -> (u64, u64);
 //!     fn on_loop(&mut self) -> Result<Option<AgentToServer>, ApiClientError>;
-//!     fn on_error(&mut self);
+//!     fn on_error(
+//!         &mut self,
+//!         inbound: &ServerToAgent,
+//!     );
 //!     fn on_health_check(
 //!         &mut self,
 //!         inbound: &ServerToAgent,

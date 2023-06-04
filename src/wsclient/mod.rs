@@ -238,6 +238,12 @@ impl Channel for WsClient<'_> {
                     };
                 }
 
+                // Relay upstream errors to the client
+                if let Some(_) = &msg.error_response {
+                    let mut func = self.callback.lock().unwrap();
+                    func.on_error(&msg);
+                }
+
                 // Check and report full state
                 if msg.flags & (ServerToAgentFlags::ReportFullState as u64) != 0 {
                     // Check our health (match it to the instance_id)
