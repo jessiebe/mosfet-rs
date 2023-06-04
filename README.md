@@ -9,7 +9,7 @@
  This library is published as a standard crate. To add it to your project, include it as a dependency inside Cargo.toml like so:
 ```
 [dependencies]
-otel-opamp-rs = "*"
+otel-opamp-rs = { version = "0.0.4", features = ["http", "websocket", "extras"] }
 ```
 ## Features
 
@@ -23,7 +23,13 @@ The code references stable releases of the OpAMP protocol protobuf definition [h
 
 ## Building
 
-This code uses the current stable release of Rust. 
+This code uses the current stable release of Rust.
+ 
+To checkout and build the code do the following:
+```
+git clone --recursive git@github.com:newrelic/otel-opamp-rs.git
+cargo build
+```
 
 ## Support
 
