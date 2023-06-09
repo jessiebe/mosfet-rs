@@ -1,11 +1,13 @@
 [package]
 name = "otel-opamp-rs"
-version = "0.0.5"
+version = "0.0.6"
 authors = ["Harsh Baste <hbaste@newrelic.com>"]
 edition = "2021"
 license-file = "LICENSE"
 description = "OpenTelemetry OpAMP protocol client library"
 homepage = "https://github.com/newrelic/otel-opamp-rs"
+rust-version = "1.70"
+keywords = ["open-telemetry", "opamp", "otel", "observability", "newrelic"]
 
 [features]
 default = ["http"]
