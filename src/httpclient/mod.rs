@@ -108,8 +108,14 @@ impl HttpClient<'_> {
         compress: bool,
     ) -> Result<ServerToAgent, ApiClientError> {
         self.seqno += 1;
-        self.last_sent_timestamp = crate::get_time_nanos!();
         message.sequence_num = self.seqno;
+        self.last_sent_timestamp = crate::get_time_nanos!();
+        if let Some(state) = self.agent_state.borrow().as_ref() {
+            message.capabilities = state.capabilities.clone();
+            message.flags = state.flags.clone();
+        } else {
+            log::warn!("Missing persistent agent state");
+        }
         log::debug!("Sending \n: {:#?}", &message);
 
         let request_body = message.encode_to_vec();

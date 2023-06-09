@@ -1,6 +1,6 @@
 [package]
 name = "otel-opamp-rs"
-version = "0.0.6"
+version = "0.0.7"
 authors = ["Harsh Baste <hbaste@newrelic.com>"]
 edition = "2021"
 license-file = "LICENSE"

@@ -62,8 +62,19 @@ impl WsClient<'_> {
 
     async fn flush(&mut self) -> Result<(), ApiClientError> {
         let pending = std::mem::replace(&mut self.outbox, Vec::new());
+        let mut capabilities = 0;
+        let mut flags = 0;
+
+        if let Some(state) = self.agent_state.borrow().as_ref() {
+            capabilities = state.capabilities.clone();
+            flags = state.flags.clone();
+        } else {
+            log::warn!("Missing persistent agent state");
+        }
 
         for mut msg in pending {
+            msg.capabilities = capabilities;
+            msg.flags = flags;
             self.seqno += 1;
             msg.sequence_num = self.seqno;
             log::debug!("Sending \n: {:#?}", &msg);
