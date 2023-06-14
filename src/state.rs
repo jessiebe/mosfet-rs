@@ -33,7 +33,7 @@ macro_rules! state_log {
 
 impl State {
     pub async fn evaluate(self, client: &mut dyn Channel) -> Result<State, ApiClientError> {
-        log::debug!("In state {:?}", self);
+        log::trace!("In state {:?}", self);
         match self {
             State::Disconnected(_) => Ok(State::Connecting(nullstr!())),
 

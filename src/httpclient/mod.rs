@@ -116,15 +116,9 @@ impl HttpClient<'_> {
         } else {
             log::warn!("Missing persistent agent state");
         }
-        log::debug!("Sending \n: {:#?}", &message);
+        log::trace!("Sending \n: {:#?}", &message);
 
         let request_body = message.encode_to_vec();
-
-        log::debug!(
-            "Sending a post to [{}] with key [{}]",
-            &self.address,
-            &self.settings.api_key
-        );
 
         let mut request = self
             .client
@@ -187,11 +181,11 @@ impl HttpClient<'_> {
                     .unwrap();
                 ServerToAgent::decode(&decompressed_data[1..]).unwrap()
             } else {
-                log::debug!("{:#?}", &response_body);
+                log::trace!("{:#?}", &response_body);
                 ServerToAgent::decode(&response_body[1..]).unwrap()
             }
         } else {
-            log::debug!("{:#?}", &response_body);
+            log::trace!("{:#?}", &response_body);
             ServerToAgent::decode(&response_body[..]).unwrap()
         };
         Ok(server_message)
@@ -356,7 +350,7 @@ impl Channel for HttpClient<'_> {
         // Check the inbox for messages to process
         if let Some(msg) = self.inbox.pop() {
             log::debug!("Received a binary message");
-            log::debug!("[ServerToAgent]\n{:#?}", &msg);
+            log::trace!("[ServerToAgent]\n{:#?}", &msg);
             if let Some(_command) = &msg.command {
                 let mut func = self.callback.lock().unwrap();
                 match func.on_command(&msg) {
@@ -403,7 +397,7 @@ impl Channel for HttpClient<'_> {
             }
 
             if let Some(agent_rc) = &msg.remote_config {
-                log::debug!("Received a remote config: {:?}", agent_rc);
+                log::trace!("Received a remote config: {:?}", agent_rc);
                 let mut func = self.callback.lock().unwrap();
                 match func.on_agent_remote_config(&msg) {
                     Ok(Some(reply)) => self.outbox.push(reply),

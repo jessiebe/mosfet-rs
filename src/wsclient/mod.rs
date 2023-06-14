@@ -77,7 +77,7 @@ impl WsClient<'_> {
             msg.flags = flags;
             self.seqno += 1;
             msg.sequence_num = self.seqno;
-            log::debug!("Sending \n: {:#?}", &msg);
+            log::trace!("Sending \n: {:#?}", &msg);
             let mut buf = Vec::new();
             buf.reserve(msg.encoded_len());
             msg.encode(&mut buf).unwrap();
@@ -237,7 +237,7 @@ impl Channel for WsClient<'_> {
             log::debug!("Received a binary websocket message");
             // NOTE: OpAMP currently has an 8 byte zero header. Skip it to parse the message
             if let Ok(msg) = ServerToAgent::decode(&mut std::io::Cursor::new(&bytes[1..])) {
-                log::debug!("Received a ServerToAgent message");
+                log::trace!("Received a ServerToAgent message");
                 if let Some(_command) = &msg.command {
                     let mut func = self.callback.lock().unwrap();
                     match func.on_command(&msg) {
@@ -286,7 +286,7 @@ impl Channel for WsClient<'_> {
                 }
 
                 if let Some(agent_rc) = &msg.remote_config {
-                    log::debug!("Received a remote config: {:?}", agent_rc);
+                    log::trace!("Received a remote config: {:?}", agent_rc);
                     let mut func = self.callback.lock().unwrap();
                     match func.on_agent_remote_config(&msg) {
                         Ok(Some(reply)) => self.outbox.push(reply),

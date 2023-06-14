@@ -73,6 +73,7 @@ impl Task {
             // Read input from stdin and send it to the subprocess
             loop {
                 let instruction = input.recv().unwrap();
+                log::debug!("Received instruction: {:#?}", &instruction);
                 match instruction {
                     Instruction::Input(input) => {
                         stdin.write_all(input.as_bytes()).unwrap();
