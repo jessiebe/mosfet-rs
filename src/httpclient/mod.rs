@@ -153,7 +153,7 @@ impl HttpClient<'_> {
         let response: Response = match request.timeout(timeout).send().await {
             Ok(resp) => {
                 if resp.status().is_success() {
-                    dbg!("Request successful");
+                    log::debug!("Request successful");
                 } else {
                     log::warn!("Request failure: {}", resp.status().as_str());
                     return Err(ApiClientError::new(line!(), resp.status().as_str()));
@@ -187,11 +187,11 @@ impl HttpClient<'_> {
                     .unwrap();
                 ServerToAgent::decode(&decompressed_data[1..]).unwrap()
             } else {
-                dbg!(format!("{:#?}", &response_body));
+                log::debug!("{:#?}", &response_body);
                 ServerToAgent::decode(&response_body[1..]).unwrap()
             }
         } else {
-            dbg!(format!("{:#?}", &response_body));
+            log::debug!("{:#?}", &response_body);
             ServerToAgent::decode(&response_body[..]).unwrap()
         };
         Ok(server_message)

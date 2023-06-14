@@ -27,7 +27,7 @@
 //! The easiest way to get started is to include and enable the following features in Cargo.toml
 //!
 //! ```toml
-//! otel-opamp-rs = { version = "0.0.4", features = ["http", "websocket", "extras"] }
+//! otel-opamp-rs = { version = "0.0.8", features = ["http", "websocket", "extras"] }
 //! ```
 //!
 //! Interfacing code needs to implement the following trait and its callbacks

@@ -9,7 +9,7 @@
  This library is published as a standard crate. To add it to your project, include it as a dependency inside Cargo.toml like so:
 ```
 [dependencies]
-otel-opamp-rs = { version = "0.0.4", features = ["http", "websocket", "extras"] }
+otel-opamp-rs = { version = "0.0.8", features = ["http", "websocket", "extras"] }
 ```
 
 For more details refer to the [API documentation](https://docs.rs/otel-opamp-rs/latest/otel_opamp_rs/)
