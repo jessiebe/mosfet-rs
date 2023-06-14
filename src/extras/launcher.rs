@@ -5,6 +5,7 @@ use subprocess::{Popen, PopenConfig, Redirection};
 /// These values are used to communicate with a subprocess launched by the `Task` struct.
 /// The `Input` variant is used to send input to the subprocess, while
 /// the `Exit` variant is used to signal that the subprocess should be terminated.
+#[derive(Debug)]
 pub enum Instruction {
     Input(String),
     Exit,
