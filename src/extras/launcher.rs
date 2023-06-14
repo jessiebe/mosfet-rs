@@ -1,6 +1,6 @@
 use crossbeam_channel::bounded;
 use std::io::Write;
-use subprocess::{Popen, PopenConfig, Redirection};
+use subprocess::{ Popen, PopenConfig, Redirection };
 
 /// These values are used to communicate with a subprocess launched by the `Task` struct.
 /// The `Input` variant is used to send input to the subprocess, while
@@ -51,11 +51,7 @@ impl Task {
             ..Default::default()
         };
 
-        log::debug!(
-            "Launching subtask {} with arguments [{:?}]",
-            &self.command,
-            &self.args
-        );
+        log::debug!("Launching subtask {} with arguments [{:?}]", &self.command, &self.args);
         let pcmd = [self.command.clone()]
             .iter()
             .chain(self.args.iter())
@@ -81,30 +77,54 @@ impl Task {
                         stdin.flush().unwrap();
                     }
                     Instruction::Exit => {
-                        handle.kill().unwrap();
-                        break;
-                    }
-                }
-            }
+                        stdin.write_all("exit\n".as_bytes()).unwrap();
+                        stdin.flush().unwrap();
+                        const WAIT_TIME: u64 = 5;
+                        log::debug!(
+                            "Waiting {} seconds for process to exit gracefully",
+                            &WAIT_TIME
+                        );
+                        std::thread::sleep(std::time::Duration::from_secs(WAIT_TIME));
 
-            // Wait for the subprocess to finish and get its output
-            match handle.wait().expect("failed to wait for agent subprocess") {
-                subprocess::ExitStatus::Exited(status) => {
-                    if status != 0 {
-                        log::warn!("subprocess exited abnormally with status: {}", status);
-                    } else {
-                        log::info!("subprocess exited successfully");
+                        if
+                            let Some(_exit_status) = handle
+                                .wait_timeout(std::time::Duration::from_secs(1))
+                                .unwrap()
+                        {
+                            log::info!("Subprocess exited gracefully.");
+                            return true;
+                        } else {
+                            log::warn!("Subprocess did not exit. Killing ...");
+                            handle.kill().unwrap();
+                        }
+
+                        // Wait for the subprocess to finish and get its output
+                        match handle.wait().expect("failed to wait for agent subprocess") {
+                            subprocess::ExitStatus::Exited(status) => {
+                                if status != 0 {
+                                    log::warn!(
+                                        "Subprocess exited abnormally with status: {}",
+                                        status
+                                    );
+                                } else {
+                                    log::info!("Subprocess exited gracefully");
+                                }
+                            }
+                            subprocess::ExitStatus::Signaled(status) => {
+                                if status != 0 {
+                                    log::warn!(
+                                        "Subprocess exited abnormally with status: {}",
+                                        status
+                                    );
+                                } else {
+                                    log::info!("Subprocess exited gracefully (signalled)");
+                                }
+                            }
+                            subprocess::ExitStatus::Other(_) => todo!(),
+                            subprocess::ExitStatus::Undetermined => todo!(),
+                        }
                     }
                 }
-                subprocess::ExitStatus::Signaled(status) => {
-                    if status != 0 {
-                        log::warn!("subprocess exited abnormally with status: {}", status);
-                    } else {
-                        log::info!("subprocess exited successfully");
-                    }
-                }
-                subprocess::ExitStatus::Other(_) => todo!(),
-                subprocess::ExitStatus::Undetermined => todo!(),
             }
         });
         true
