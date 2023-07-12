@@ -1,8 +1,15 @@
-<a href="https://opensource.newrelic.com/oss-category/#community-project"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/dark/Community_Project.png"><source media="(prefers-color-scheme: light)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Project.png"><img alt="New Relic Open Source community project banner." src="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Project.png"></picture></a>
+# Libre OpAMP Rust
 
-# OpAMP Rust
+This project is a fork of the open-source implementation of the Open Agent Management Protocol (OpAMP) client library originally developed by New Relic: github.com/newrelic/otel-opamp-rs. The protocol provides a network protocol for remote management of agents, aiming to transmit observability metrics in a reliable and efficient manner. Leveraging the performance and memory safety features inherent to Rust, this fork takes it a step further by making the client library vendor-independend.
 
- The Open Agent Management Protocol (OpAMP) is a network protocol for remote management of agents. This project aims to implement the OpAMP protocol in a client library that can be used by Supervisor processes. By leveraging Rust's memory safety and performance, we aim to provide a reliable and efficient way of transmitting observability metrics.
+ # Why Fork
+
+This vendor-independent version emerges from several key motivations:
+
+This fork allows us to tailor the software to meet diverse needs that the original version may not have addressed and offers an environment for experimentation with novel features and methodologies, potentially leading to advancements beyond the scope of the original project.
+Our vendor-independent stance encourages wider community engagement and contributions, from all vendors and individual open source contributors fostering a robust and superior software project.
+
+This project is not affiliated with New Relic and the fork has been created under the rights granted by the Apache 2.0 License under which the original code has been published.
 
 ## Getting Started
 
@@ -29,29 +36,19 @@ This code uses the current stable release of Rust.
 
 To checkout and build the code do the following:
 ```
-git clone --recursive git@github.com:newrelic/otel-opamp-rs.git
+git clone --recursive https://gitlab.com/nemski/libreotel-opamp-rs.git
 cargo build
 ```
 
 ## Support
 
-This library is owned and maintained by members of the CA organization within New Relic. The authors will respond to bug reports and feature requests on a prioritized basis. 
+We do not provide a warranty or guarantee of support from the developers or maintainers of the software. The users do not have a right to receive support. This software is provided "as-is".
+We do not guarantee that the software will work perfectly or will be free from bugs. We are not liable for any issues or damages that might occur as a result of using the software.
 
 ## Contribute
 
-We encourage your contributions to improve otel-opamp-rs! Keep in mind that when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
+We encourage your contributions to improve libreotel-opamp-rs! 
 
-If you have any questions, or to execute our corporate CLA (which is required if your contribution is on behalf of a company), drop us an email at opensource@newrelic.com.
-
-**A note about vulnerabilities**
-
-As noted in our [security policy](../../security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
-
-If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
-
-If you would like to contribute to this project, review [these guidelines](./CONTRIBUTING.md).
-
-To all contributors, we thank you!  Without your contribution, this project would not be what it is today.  
 
 ## License
 OpAMP-RS is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
