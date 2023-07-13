@@ -56,5 +56,5 @@ We encourage your contributions to improve mosfet-rs!
 
 
 ## License
-OpAMP-RS is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+MOSFET-RS is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
 > The otel-opamp-rs crate also uses source code from third-party libraries. You can find full details on which libraries are used within the Cargo.toml dependency specification section
