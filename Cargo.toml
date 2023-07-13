@@ -1,13 +1,13 @@
 [package]
-name = "otel-opamp-rs"
+name = "mosfet-rs"
 version = "0.0.10"
-authors = ["Harsh Baste <hbaste@newrelic.com>"]
+authors = ["Harsh Baste <hbaste@newrelic.com>", "Nemski Sokolov <nemski@pm.me>"]
 edition = "2021"
 license-file = "LICENSE"
 description = "OpenTelemetry OpAMP protocol client library"
-homepage = "https://github.com/newrelic/otel-opamp-rs"
+homepage = "https://gitlab.com/nemski/mosfet-rs"
 rust-version = "1.70"
-keywords = ["open-telemetry", "opamp", "otel", "observability", "newrelic"]
+keywords = ["open-telemetry", "opamp", "otel", "observability"]
 
 [features]
 default = ["http"]
