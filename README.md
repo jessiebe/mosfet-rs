@@ -24,7 +24,7 @@ This project is not affiliated with New Relic and the fork has been created unde
 mosfet-rs = { version = "0.0.8", features = ["http", "websocket", "extras"] }
 ```
 
-For more details refer to the [API documentation](https://docs.rs/otel-opamp-rs/latest/otel_opamp_rs/)
+For more details refer to the [API documentation](https://docs.rs/mosfet-rs/latest/mosfet_rs/)
 ## Features
 
 This library supports the following capabilities
